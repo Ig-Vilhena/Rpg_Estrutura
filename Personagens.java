@@ -1,27 +1,32 @@
 package Personagens;
-
-import java.util.random.*;
+import java.util.LinkedList;
+import java.util.Random;
+import java.util.Random;
 import java.util.UUID;
 
 public class Personagens {
 
     private String idPersonagem;
     private String nome;
+    private int xp = 0;
     private int nivel;
     private int vidaMaxima;
     private int vidaAtual;
     private int manaMaxima;
     private int manaAtual;
+    private LinkedList<String> Habilidades;
 
     public Personagens(String nome, int nivel, int vidaMaxima, int vidaAtual, int manaMaxima,
             int manaAtual) {
         this.idPersonagem = UUID.randomUUID().toString();
+
         this.nome = nome;
         this.nivel = nivel;
         this.vidaMaxima = vidaMaxima;
         this.vidaAtual = vidaAtual;
         this.manaMaxima = manaMaxima;
         this.manaAtual = manaAtual;
+        this.Habilidades = new LinkedList<>();
     }
 
     public String getIdPersonagem() {
@@ -83,24 +88,58 @@ public class Personagens {
     // --------------------------------------------------------//
 
     public void receberDano(int valor) {
-        double random = Math.random() * +1;
-        System.out.println(random);
+        Random rand = new Random(valor);
+        int dano = rand.nextInt(15) + 5;
+        vidaAtual -= dano;
+        System.out.println(nome + " recebeu " + dano + " de dano\n");
+        System.out.println("Vida atual: " + vidaAtual);
+
     }
 
-    public void usarHabilidade(int idHabilidade) {
-
+    public void usarHabilidade(int idHabilidade, Personagens alvo) {
+  
     }
+
 
     public void curar(int valor) {
-
+        valor += vidaAtual;
+        if (vidaAtual> vidaMaxima) {
+            vidaAtual = vidaMaxima;
+            System.out.println(nome+ " foi curado " + valor );
+            System.out.println("Vida atual: " + vidaAtual);
+            
+        }
     }
 
     public boolean estaVivo() {
-        return false;
+        if (vidaAtual <= 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public void subirNivel() {
 
+        if (nivel<20) {
+            nivel++;
+        vidaMaxima+= 20;
+        manaMaxima +=20;
+        vidaAtual = vidaMaxima;
+        System.out.println(nome + " subiu de nível.\n Nível atual: " + nivel );
+ 
+        } else if(nivel <10){
+            nivel++;
+            vidaMaxima+= 15;
+            manaMaxima +=15;
+            vidaAtual = vidaMaxima;
+            System.out.println(nome + " subiu de nível.\n Nível atual: " + nivel );
+        }else if (nivel <5){
+            nivel++;
+            vidaMaxima+= 10;
+            manaMaxima += 10;
+            vidaAtual = vidaMaxima;
+            System.out.println(nome + " subiu de nível.\n Nível atual: " + nivel );
+        }        
     }
-
 }
