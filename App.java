@@ -46,7 +46,7 @@ public class App {
                     } while (!loginSucesso);
 
                     break;
-             case "4":
+             case "3":
                   if (jogador.selecionarPersonagem(0) == null) {
                    System.out.println("Você precisa criar pelo menos um personagem.");
                     } else {
