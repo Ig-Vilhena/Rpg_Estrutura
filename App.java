@@ -46,6 +46,19 @@ public class App {
                     } while (!loginSucesso);
 
                     break;
+             case "4":
+                  if (jogador.selecionarPersonagem(0) == null) {
+                   System.out.println("Você precisa criar pelo menos um personagem.");
+                    } else {
+                   System.out.print("Nome do inimigo: ");
+                String nomeInimigo = sc.nextLine();
+
+        
+               Personagem inimigo = new Personagem(nomeInimigo, 1, 80, 40);
+               Arena arena = new Arena(jogador.selecionarPersonagem(0), inimigo);
+               arena.iniciarBatalha();
+            }
+                   break;        
 
                 case "X":
                 case "x":
