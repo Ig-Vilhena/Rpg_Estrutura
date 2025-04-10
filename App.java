@@ -5,7 +5,7 @@ import Personagens.Personagens;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        Jogador j2 = new Jogador();
+        Jogador j2 = new Jogador(null, null);
         String opcao;
         boolean continuar = true;
 
@@ -34,32 +34,20 @@ public class App {
                     do {
 
                         System.out.println("Insira nome de Login: ");
-                        String nome2 = sc.nextLine();
+                        String nome1 = sc.nextLine();
                         System.out.println("Insira senha: ");
                         String senha1 = sc.nextLine();
 
-                        if (j2.autenticar(nome2, senha1)) {
+                        if (j2.autenticar(nome1, senha1)) {
                             System.out.println("Login realizado com sucesso!");
                             loginSucesso = true;
+                            continuar = false;
                         } else {
-                            System.out.println("Nome de usuário ou senha incorretos.");
+                            System.out.println("Nome de usuário ou senha incorretos ou inexistentes.");
                         }
                     } while (!loginSucesso);
-                    continuar = false;
+                    
                     break;
-             case "3":
-                  if (jogador.selecionarPersonagem(0) == null) {
-                   System.out.println("Você precisa criar pelo menos um personagem.");
-                    } else {
-                   System.out.print("Nome do inimigo: ");
-                String nomeInimigo = sc.nextLine();
-
-        
-               Personagens inimigo = new Personagens(nomeInimigo, 1, 80, 40);
-               Arena arena = new Arena(jogador.selecionarPersonagem(0), inimigo);
-               arena.iniciarBatalha();
-            }
-                   break;        
 
                 case "X":
                 case "x":
@@ -72,6 +60,16 @@ public class App {
                     break;
             }
         } while (continuar); 
+        
         sc.close();
+
+        continuar = true;
+        
+        if (continuar) {
+            
+        }
+           
+        
+        
     }
 }
