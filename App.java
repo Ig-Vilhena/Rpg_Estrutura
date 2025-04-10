@@ -1,12 +1,13 @@
 import java.util.Scanner;
-
 import Jogadores.Jogador;
+import Personagens.Personagens;
 
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         Jogador j2 = new Jogador();
         String opcao;
+        boolean continuar = true;
 
         do {
             System.out.println("/=== Bem vindo ao XXXXXX ===/");
@@ -44,7 +45,7 @@ public class App {
                             System.out.println("Nome de usuário ou senha incorretos.");
                         }
                     } while (!loginSucesso);
-
+                    continuar = false;
                     break;
              case "3":
                   if (jogador.selecionarPersonagem(0) == null) {
@@ -54,7 +55,7 @@ public class App {
                 String nomeInimigo = sc.nextLine();
 
         
-               Personagem inimigo = new Personagem(nomeInimigo, 1, 80, 40);
+               Personagens inimigo = new Personagens(nomeInimigo, 1, 80, 40);
                Arena arena = new Arena(jogador.selecionarPersonagem(0), inimigo);
                arena.iniciarBatalha();
             }
@@ -63,13 +64,14 @@ public class App {
                 case "X":
                 case "x":
                     System.out.println("Encerrando o programa...");
+                    continuar = false;
                     break;
 
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
             }
-        } while (!opcao.equalsIgnoreCase("X") || ); 
+        } while (continuar); 
         sc.close();
     }
 }
