@@ -1,17 +1,13 @@
-public class Arena {
-    
-
-import Personagens.Personagem;
 import java.util.Random;
 import java.util.Scanner;
+import Personagens.Personagens;
 
 public class Arena {
-
-    private Personagem jogador;
-    private Personagem inimigo;
+    private Personagens jogador;
+    private Personagens inimigo;
     private Scanner sc;
 
-    public Arena(Personagem jogador, Personagem inimigo) {
+    public Arena(Personagens jogador, Personagens inimigo) {
         this.jogador = jogador;
         this.inimigo = inimigo;
         this.sc = new Scanner(System.in);
@@ -67,12 +63,4 @@ public class Arena {
             inimigo.curar(10);
         }
     }
-}
-
-
-
-
-
-
-    
 }
