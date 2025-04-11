@@ -1,66 +1,117 @@
-import java.util.Random;
 import java.util.Scanner;
-import Personagens.Personagens;
+import java.util.Random;
 
 public class Arena {
-    private Personagens jogador;
-    private Personagens inimigo;
-    private Scanner sc;
 
-    public Arena(Personagens jogador, Personagens inimigo) {
-        this.jogador = jogador;
-        this.inimigo = inimigo;
-        this.sc = new Scanner(System.in);
+    private int idBatalha;
+    private Fila filaTurnos;
+    private Pilha pilhaRanking;
+    private int turnoAtual;
+    private String estadoBatalha;
+
+    public Arena(int idBatalha, Fila participantes) {
+        this.idBatalha = idBatalha;
+        this.filaTurnos = participantes;
+        this.pilhaRanking = new Pilha(participantes.quantidade);
+        this.turnoAtual = 1;
+        this.estadoBatalha = "Em andamento";
+    }
+
+    public Arena(){
+        
     }
 
     public void iniciarBatalha() {
-        System.out.println("\n Arena de Batalha ");
-        System.out.println(jogador.getNome() + " VS " + inimigo.getNome());
+        System.out.println("\n===== INICIANDO BATALHA ID " + idBatalha + " =====");
+        System.out.println("Participantes:");
+    
+        filaTurnos.exibir();
 
-        while (jogador.estaVivo() && inimigo.estaVivo()) {
-            turnoJogador();
-            if (!inimigo.estaVivo()) break;
-
-            turnoInimigo();
+        while (estadoBatalha.equals("Em andamento")) {
+            executarTurno();
+            verificarVencedor();
         }
 
-        if (jogador.estaVivo()) {
-            System.out.println("\n🏆 " + jogador.getNome() + " venceu a batalha!");
-            jogador.subirNivel();
-        } else {
-            System.out.println("\n💀 " + jogador.getNome() + " foi derrotado.");
-        }
+        exibirRankingFinal();
     }
 
-    private void turnoJogador() {
-        System.out.println("\nSeu turno!");
-        System.out.println("1. Atacar inimigo");
-        System.out.println("2. Curar-se");
-        System.out.print("Escolha: ");
-        String escolha = sc.nextLine();
+    public void executarTurno() {
+        System.out.println("\n===== TURNO " + turnoAtual + " =====");
 
-        switch (escolha) {
-            case "1":
-                inimigo.receberDano(jogador.getNivel()); // usa o nível como base pro dano
-                break;
-            case "2":
-                jogador.curar(20); // cura padrão de 20
-                break;
-            default:
-                System.out.println("Ação inválida. Você perdeu o turno!");
+        Personagens atual = filaTurnos.desenfileirar();
+
+        if (atual != null && atual.estaVivo()) {
+            realizarAcao(atual);
+            filaTurnos.enfileirar(atual);
+        } else if (atual != null) {
+            pilhaRanking.empilhar(atual);
+            System.out.println(atual.getNome() + " foi derrotado!");
         }
+
+        turnoAtual++;
     }
 
-    private void turnoInimigo() {
-        System.out.println("\nTurno do inimigo: " + inimigo.getNome());
-
+    private void realizarAcao(Personagens personagem) {
+        Scanner sc = new Scanner(System.in);
         Random random = new Random();
-        int acao = random.nextInt(2); // 0 = atacar, 1 = curar
 
-        if (acao == 0) {
-            jogador.receberDano(inimigo.getNivel());
+        System.out.println("Vez de: " + personagem.getNome());
+
+        if (personagem.getTipo().equals("Jogador")) {
+            System.out.println("1. Atacar");
+            System.out.println("2. Curar-se");
+            System.out.print("Escolha: ");
+            String escolha = sc.nextLine();
+
+            if (escolha.equals("1")) {
+                Personagens alvo = filaTurnos.espiar();
+                alvo.receberDano(personagem.getNivel());
+                System.out.println(personagem.getNome() + " atacou " + alvo.getNome());
+            } else if (escolha.equals("2")) {
+                personagem.curar(20);
+                System.out.println(personagem.getNome() + " se curou");
+            } else {
+                System.out.println("Ação inválida. Perdeu o turno.");
+            }
         } else {
-            inimigo.curar(10);
+            int acao = random.nextInt(2); // 0 = atacar, 1 = curar
+            if (acao == 0) {
+                Personagens alvo = filaTurnos.espiar();
+                alvo.receberDano(personagem.getNivel());
+                System.out.println(personagem.getNome() + " atacou " + alvo.getNome());
+            } else {
+                personagem.curar(10);
+                System.out.println(personagem.getNome() + " se curou");
+            }
         }
+    }
+
+    public void verificarVencedor() {
+        int vivos = 0;
+        Personagens ultimoVivo = null;
+
+        Node temp = filaTurnos.head;
+        while (temp != null) {
+            Personagens p = (Personagens) temp.valor;
+            if (p.estaVivo()) {
+                vivos++;
+                ultimoVivo = p;
+            }
+            temp = temp.next;
+        }
+
+        if (vivos <= 1) {
+            estadoBatalha = "Finalizada";
+            if (ultimoVivo != null) {
+                pilhaRanking.empilhar(ultimoVivo);
+                System.out.println("\n🏆 " + ultimoVivo.getNome() + " venceu a batalha!");
+                ultimoVivo.subirNivel();
+            }
+        }
+    }
+
+    public void exibirRankingFinal() {
+        System.out.println("\n===== RANKING FINAL =====");
+        pilhaRanking.exibir();
     }
 }
