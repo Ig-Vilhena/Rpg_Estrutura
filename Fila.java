@@ -1,77 +1,111 @@
-package Jogadores;
-import Personagens.Personagens;
 public class Fila {
-    
+
     Node head;
     Node tail;
     int quantidade;
     int tamanho;
-    
-    public Fila(int tamanhoMaximo){
+
+    public Fila(int tamanhoMaximo) {
         this.tamanho = tamanhoMaximo;
-        quantidade =0;
+        this.quantidade = 0;
     }
 
-    public void addPersonagem(Personagens Personagens){
-        if (quantidade< tamanho) {
-            Node newNode = new Node(null);
+    public void addPersonagem(Personagens personagem) {
+        if (quantidade < tamanho) {
+            Node newNode = new Node(personagem);
             if (head == null) {
-                head = newNode; 
+                head = newNode;
                 tail = newNode;
-                quantidade++;
-                return;
-                
-            }else{
+            } else {
+                tail.next = newNode;
                 tail = newNode;
-                newNode = tail;
-                tail = newNode;
-                quantidade++;
-                return;
             }
-        }else{
-            System.out.println("A quantidade de personagens atingiu limite maximo");
-        } 
+            quantidade++;
+        } else {
+            System.out.println("A quantidade de personagens atingiu o limite máximo");
+        }
     }
-    public void removerPersonagem(){
+
+    public void removerPersonagem() {
         if (head == null) {
-            System.out.println("Nao há personagens criados");
-        }if (head == tail) {
+            System.out.println("Não há personagens criados");
+        } else if (head == tail) {
             head = null;
             tail = null;
             quantidade--;
-            return;
-            
-        }else{
-            Node temp = head.next;
-
-            head.next =null;
-            head = temp;
+        } else {
+            head = head.next;
             quantidade--;
+        }
+    }
+
+    public void listar() {
+        if (head == null) {
+            System.out.println("Não há personagens criados");
+        } else {
+            Node temp = head;
+            int i = 0;
+            while (temp != null) {
+                Personagens p = (Personagens) temp.valor;
+                System.out.println("[" + i + "] " + p.getNome());
+                temp = temp.next;
+                i++;
+            }
+        }
+    }
+
+    public Personagens getElementoPorIndice(int index) {
+        if (index < 0 || index >= quantidade) {
+            return null;
+        }
+        Node temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        return (Personagens) temp.valor;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public boolean estaCheia() {
+        return quantidade >= tamanho;
+    }
+
+    public boolean enfileirar(Personagens personagem) {
+        if (quantidade < tamanho) {
+            addPersonagem(personagem);
+            return true;
+        }
+        return false;
+    }
+    public void exibir() {
+        if (isEmpty()) {
+            System.out.println("Fila vazia.");
             return;
         }
-    }
-    public void personagens(){
-        if (head == null) {
-            System.out.println("Nao ha personagens criados");
-        }else{
-
+    
+        Node aux = head;
+        while (aux != null) {
+            Personagens p = (Personagens) aux.valor;
+            System.out.println("- " + p.getNome() + " (HP: " + p.getVidaAtual() + "  Nível: " + p.getNivel() + "  Mana: " + p.getManaAtual() + "  Id(personagem): " + p.getIdPersonagem() + ")");
+            aux = aux.next;
         }
     }
-
-    public boolean isEmpty(){
-        if (head ==null) {
-            return true;
-            
-        }else{
-            return false;
-
+    public Personagens desenfileirar() {
+        if (isEmpty()) {
+            return null;
         }
+        Personagens personagem = (Personagens) head.valor;
+        removerPersonagem();
+        return personagem;
     }
-    public boolean isFull(){
-        if (quantidade<= tamanho) {
-            return true;
-        }else{
-            return false;
+
+    public Personagens espiar() {
+        if (isEmpty()) {
+            return null;
         }
+        return (Personagens) head.valor;
     }
 }
