@@ -5,6 +5,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
         Jogador jogador = null;
         String opcao;
+        int opcao2;
         boolean continuar = true;
         Arena arena = new Arena();
 
@@ -94,11 +95,14 @@ public class App {
                     System.out.println("Tipo de batalha");
                     System.out.println("1. PvP");
                     System.out.println("2. PvE");
-                    opcao = sc.nextLine();
+                    opcao2 = sc.nextInt();
+                    sc.nextLine();
+                    /* o menu de seleçao dentro do tipo de batalha 
+                    esta funcionando, mas se vc botar um valor invalido (qualquer valor que nao seja 1 ou 2, o codigo nao mostra o "Opção inválida." ele só quebra)*/
 
-                    if (opcao == "1") {
-                        
-                    }else if (opcao == "2") {
+                    if (opcao2 == 1) {
+                        System.out.println("teste");
+                    }else if (opcao2 == 2) {
                         
 
                     }else{
