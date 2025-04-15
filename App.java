@@ -5,13 +5,12 @@ public class App {
         Scanner sc = new Scanner(System.in);
         Jogador jogador = null;
         String opcao;
-        int opcao2;
         boolean continuar = true;
         Arena arena = new Arena();
 
         // Tela Login/Cadastro
         do {
-            System.out.println("/=== Bem vindo ao RPG X ===/");
+            System.out.println("==== Bem vindo ao RPG X ====");
             System.out.println("1. Criar conta nova");
             System.out.println("2. Login");
             System.out.println("X. Fechar");
@@ -92,22 +91,30 @@ public class App {
                     break;
 
                 case "5":
-                    System.out.println("Tipo de batalha");
-                    System.out.println("1. PvP");
-                    System.out.println("2. PvE");
-                    opcao2 = sc.nextInt();
-                    sc.nextLine();
-                    /* o menu de seleçao dentro do tipo de batalha 
-                    esta funcionando, mas se vc botar um valor invalido (qualquer valor que nao seja 1 ou 2, o codigo nao mostra o "Opção inválida." ele só quebra)*/
+                    if (!jogador.getPersonagens().isEmpty()){
+                        System.out.println("==== Tipo de batalha ====");
+                        System.out.println("1. PvP");
+                        System.out.println("2. PvE");
+                        opcao = sc.nextLine();
 
-                    if (opcao2 == 1) {
-                        System.out.println("teste");
-                    }else if (opcao2 == 2) {
+                        switch (opcao) {
+                            case "1":
+                                
+                            break;
+
+                            case "2":
+
+                            break;
                         
-
+                            default:
+                            System.out.println("opcao inexistente");
+                            break;
+                        } 
+                        
                     }else{
-                        System.out.println("opcao inexistente");
+                        System.out.println("Você precisa criar pelo menos um personagem antes de iniciar uma batalha.");
                     }
+                    
                     break;
 
                 case "X":
