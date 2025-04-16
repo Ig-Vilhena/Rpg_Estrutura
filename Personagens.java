@@ -3,6 +3,8 @@ import java.util.UUID;
 
 public class Personagens {
 
+    private static int indiceGlobal = 0;
+    private int indice;
     private String idPersonagem;
     private String nome;
     private int nivel;
@@ -15,6 +17,7 @@ public class Personagens {
 
     public Personagens(String nome, int nivel, int vidaMaxima, int vidaAtual, int manaMaxima, int manaAtual) {
         this.idPersonagem = UUID.randomUUID().toString();
+        this.indice = indiceGlobal++;
         this.nome = nome;
         this.nivel = nivel;
         this.vidaMaxima = vidaMaxima;
@@ -92,6 +95,10 @@ public class Personagens {
         habilidades.add(habilidade);
     }
 
+    public int getIndice() {
+        return indice;
+    }
+
     public void receberDano(int valor) {
         vidaAtual -= valor;
         if (vidaAtual < 0) {
@@ -105,7 +112,7 @@ public class Personagens {
         if (idHabilidade >= 0 && idHabilidade < habilidades.size()) {
             String habilidade = habilidades.get(idHabilidade);
             System.out.println(nome + " usou " + habilidade + " em " + alvo.getNome());
-            alvo.receberDano(10); 
+            alvo.receberDano(10);
         } else {
             System.out.println("Habilidade inválida.");
         }
