@@ -110,7 +110,7 @@ public class App {
                                 break;
 
                                 default:
-                                System.out.println("Opçao invalida");
+                                System.out.println("Opção inválida.");
                                 break;
                             }
                         }else{
@@ -180,7 +180,7 @@ public class App {
                                         }else if (opcao == "2") {
                                             continuar = false;
                                         }else{
-                                            System.out.println("Opção inválida");
+                                            System.out.println("Opção inválida. Tente novamente.");
                                         }
                                     }while(continuar);
                                 }
@@ -189,7 +189,7 @@ public class App {
                             break;
                         
                             default:
-                            System.out.println("opcao inexistente");
+                            System.out.println("Opção inválida. Tente novamente.");
                             break;
                         } 
 
@@ -206,7 +206,7 @@ public class App {
                     break;
 
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println("Opção inválida. Tente novamente.");
                     break;
             }
         }
