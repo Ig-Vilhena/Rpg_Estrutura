@@ -146,21 +146,46 @@ public class App {
                             break;
 
                             case "2":
-                            Personagens personagemJogador = jogador.selecionarPersonagem();
-                                 if (personagemJogador == null) {
-                                    System.out.println("Nenhum personagem disponível.");
-                                    break;
-                                       }
+                            do {
+                                System.out.println("\n===== PERSONAGENS CRIADOS =====");
+                                jogador.getPersonagens().exibir();
 
-                                   Fila fila = new Fila(2);
-                                   fila.enfileirar(personagemJogador);
+                                if (!jogador.getPersonagens().isEmpty()) {
+                                    System.out.println("\nEscolha o personagem: ");
+                                    int indice = sc.nextInt();
+                                    sc.nextLine();
+
+                                    Personagens personagem = jogador.getPersonagens().getElementoPorIndice(indice);
+                                    if (personagem != null) {
+                                            System.out.println("Personagem selecionado: " + personagem.getNome());
+
+                                        Fila fila = new Fila(2);
+                                        fila.enfileirar(personagem);
 
                                 
-                                 Inimigo inimigo = new Inimigo("Goblin", 1, 80, 80, 30, 30, "Goblin");
-                                fila.enfileirar(inimigo);
+                                        Inimigo inimigo = new Inimigo("Goblin", 1, 80, 80, 30, 30, "Goblin");
+                                        fila.enfileirar(inimigo);
 
-                                Arena batalhaPvE = new Arena(1, fila);
-                                batalhaPvE.iniciarBatalha();
+                                        Arena batalhaPvE = new Arena(1, fila);
+                                        batalhaPvE.iniciarBatalha();
+                                    }
+                                    do{
+                                        System.out.println("Deseja jogar novamente");
+                                        System.out.println("1. Sim");
+                                        System.out.println("2. Não");
+                                        opcao = sc.nextLine();
+
+                                        if (opcao == "1") {
+                                            
+                                        }else if (opcao == "2") {
+                                            continuar = false;
+                                        }else{
+                                            System.out.println("Opção inválida");
+                                        }
+                                    }while(continuar);
+                                }
+                            } while (continuar);
+                            continuar = true;
                             break;
                         
                             default:
