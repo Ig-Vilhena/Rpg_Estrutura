@@ -65,7 +65,7 @@ public class Pilha {
         Node temp = topo;
         while (temp != null) {
             Personagens p = (Personagens) temp.valor;
-            System.out.println(p);
+            System.out.println(p.getNome());
             temp = temp.next;
         }
     }
