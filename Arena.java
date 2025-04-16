@@ -92,7 +92,7 @@ public class Arena {
             estadoBatalha = "Finalizada";
             if (ultimoVivo != null) {
                 pilhaRanking.empilhar(ultimoVivo);
-                System.out.println("\n🏆 " + ultimoVivo.getNome() + " venceu a batalha!");
+                System.out.println("\n" + ultimoVivo.getNome() + " venceu a batalha!");
                 ultimoVivo.subirNivel();
             }
         }
