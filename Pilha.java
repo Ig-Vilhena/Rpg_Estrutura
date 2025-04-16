@@ -1,5 +1,4 @@
 public class Pilha {
-
     Node topo;
     int quantidade;
     int tamanho;
