@@ -82,7 +82,7 @@ public class Fila {
     }
     public void exibir() {
         if (isEmpty()) {
-            System.out.println("Fila vazia.");
+            System.out.println("Não há personagens criados");
             return;
         }
     
