@@ -191,19 +191,25 @@ public class App {
                                     batalhaPvE.iniciarBatalha();   
                                     
                                     do {
-                                        System.out.println("Deseja jogar novamente");
+                                        System.out.println("Deseja jogar novamente?");
                                         System.out.println("1. Sim");
                                         System.out.println("2. Não");
                                         opcao = sc.nextLine();
-    
+                                    
                                         if (opcao.equals("1")) {
+                                            personagem1.setVidaAtual(personagem1.getVidaMaxima());
+                                            personagem2.setVidaAtual(personagem2.getVidaMaxima());
                                             continuar = true;
                                         } else if (opcao.equals("2")) {
+                                            if (personagem1 != null && personagem2 != null) {
+                                                personagem1.setVidaAtual(personagem1.getVidaMaxima());
+                                                personagem1.setVidaAtual(personagem2.getVidaMaxima());
+                                            }
                                             continuar = false;
                                         } else {
-                                            System.out.println("Opção inválida");
+                                            System.out.println("Opção inválida.");
                                         }
-                                    } while (continuar);
+                                    } while (!opcao.equals("1") && !opcao.equals("2"));
                                 }
                             } while (continuar);
     
