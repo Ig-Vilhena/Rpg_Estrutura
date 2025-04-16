@@ -149,7 +149,65 @@ public class App {
 
                         switch (opcao) {
                             case "1":
-                                
+                                do {
+                                System.out.println("\n===== PERSONAGENS CRIADOS =====");
+                                jogador.getPersonagens().exibir();
+
+                                if (!jogador.getPersonagens().isEmpty()) {
+                                    Personagens personagem1 = null;
+                                    Personagens personagem2 = null;
+                            
+                                    while (personagem1 == null) {
+                                        System.out.println("\nJogador 1, escolha o personagem:");
+                                        int indice1 = sc.nextInt();
+                                        sc.nextLine(); 
+                                        personagem1 = jogador.getPersonagens().getElementoPorIndice(indice1);
+                            
+                                        if (personagem1 == null) {
+                                            System.out.println("Personagem inválido. Tente novamente.");
+                                        } else {
+                                            System.out.println("Jogador 1 selecionou: " + personagem1.getNome());
+                                        }
+                                    }
+                                    
+                                    while (personagem2 == null) {
+                                        System.out.println("\nJogador 2, escolha o personagem:");
+                                        int indice2 = sc.nextInt();
+                                        sc.nextLine(); 
+                                        personagem2 = jogador.getPersonagens().getElementoPorIndice(indice2);
+                            
+                                        if (personagem2 == null) {
+                                            System.out.println("Personagem inválido. Tente novamente.");
+                                        } else {
+                                            System.out.println("Jogador 2 selecionou: " + personagem2.getNome());
+                                        }
+                                    }
+                                    
+                                    Fila fila = new Fila(2);
+                                    fila.enfileirar(personagem1);
+                                    fila.enfileirar(personagem2);
+
+                                    Arena batalhaPvE = new Arena(1, fila);
+                                    batalhaPvE.iniciarBatalha();   
+                                    
+                                    do {
+                                        System.out.println("Deseja jogar novamente");
+                                        System.out.println("1. Sim");
+                                        System.out.println("2. Não");
+                                        opcao = sc.nextLine();
+    
+                                        if (opcao.equals("1")) {
+                                            continuar = true;
+                                        } else if (opcao.equals("2")) {
+                                            continuar = false;
+                                        } else {
+                                            System.out.println("Opção inválida");
+                                        }
+                                    } while (continuar);
+                                }
+                            } while (continuar);
+    
+                            continuar = true;
                             break;
 
                             case "2":
