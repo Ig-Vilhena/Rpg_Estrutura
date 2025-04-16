@@ -113,6 +113,8 @@ public class App {
                                 System.out.println("Opçao invalida");
                                 break;
                             }
+                        }else{
+                            continuar = false;
                         }   
                     }while (continuar);
 
