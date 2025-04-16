@@ -88,21 +88,28 @@ public class App {
 
                             switch (opcao) {
                                 case "1":
-                                System.out.println("Digite o índice do personagem que deseja editar:");
-                                int indice = sc.nextInt();
-                                    sc.nextLine();
+                                    boolean personagemValido = false;
+                                    while (!personagemValido) {
+                                        System.out.println("Digite o índice do personagem que deseja editar:");
+                                        int indice = sc.nextInt();
+                                        sc.nextLine();
 
-                                Personagens personagem = jogador.getPersonagens().getElementoPorIndice(indice);
-                                if (personagem != null) {
-                                    System.out.println("Personagem selecionado: " + personagem.getNome());
-                            
-                                    System.out.println("Digite o novo nome:");
-                                    String novoNome = sc.nextLine();
-                                    personagem.setNome(novoNome);
-                                    System.out.println("Nome atualizado com sucesso!");
-                                    continuar = false;
-                                }
-                                break;
+                                        Personagens personagem = jogador.getPersonagens().getElementoPorIndice(indice);
+                                        if (personagem != null) {
+                                            System.out.println("Personagem selecionado: " + personagem.getNome());
+
+                                            System.out.println("Digite o novo nome:");
+                                            String novoNome = sc.nextLine();
+                                            personagem.setNome(novoNome);
+                                            System.out.println("Nome atualizado com sucesso!");
+                                            personagemValido = true;
+                                            continuar = false;
+                                        } else {
+                                            System.out.println("Índice inválido. Personagem inexistente. Tente novamente.");
+                                        }
+                                    }
+                                    break;
+
 
                                 case "2":
                                 System.out.println("Saindo...");
