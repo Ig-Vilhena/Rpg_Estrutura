@@ -1,11 +1,9 @@
-package Jogadores;
-public class Node{
-    Jogador jogador;
+public class Node {
+    Object valor;
     Node next;
 
-    public Node(Jogador jogador){
-        this.jogador = jogador;
+    public Node(Object valor) {
+        this.valor = valor;
         this.next = null;
-
     }
 }
