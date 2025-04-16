@@ -217,28 +217,30 @@ public class App {
                             break;
 
                             case "2":
-                            do {
+                           do {
                                 System.out.println("\n===== PERSONAGENS CRIADOS =====");
                                 jogador.getPersonagens().exibir();
 
+
+                               
                                 if (!jogador.getPersonagens().isEmpty()) {
+                                    
                                     System.out.println("\nEscolha o personagem: ");
                                     int indice = sc.nextInt();
                                     sc.nextLine();
 
                                     Personagens personagem = jogador.getPersonagens().getElementoPorIndice(indice);
                                     if (personagem != null) {
-                                            System.out.println("Personagem selecionado: " + personagem.getNome());
+                                        System.out.println("Personagem selecionado: " + personagem.getNome());
+
+                                        Inimigo inimigo = new Inimigo("Goblin", 1, 80, 80, 30, 30, "Goblin");
 
                                         Fila fila = new Fila(2);
                                         fila.enfileirar(personagem);
-
-                                
-                                        Inimigo inimigo = new Inimigo("Goblin", 1, 80, 80, 30, 30, "Goblin");
                                         fila.enfileirar(inimigo);
 
                                         Arena batalhaPvE = new Arena(1, fila);
-                                        batalhaPvE.iniciarBatalha();
+                                        batalhaPvE.iniciarBatalhaPvE();
                                     }
                                     personagem = null;
                                     Inimigo inimigo = null;
