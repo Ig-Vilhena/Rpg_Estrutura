@@ -101,6 +101,7 @@ public class Personagens {
 
     public void receberDano(int valor) {
         vidaAtual -= valor;
+        valor = 25;
         if (vidaAtual < 0) {
             vidaAtual = 0;
         }
