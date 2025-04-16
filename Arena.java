@@ -56,33 +56,21 @@ public class Arena {
         Random random = new Random();
 
         System.out.println("Vez de: " + personagem.getNome());
-
-        if (personagem.getTipo().equals("Jogador")) {
-            System.out.println("1. Atacar");
-            System.out.println("2. Curar-se");
-            System.out.print("Escolha: ");
-            String escolha = sc.nextLine();
-
-            if (escolha.equals("1")) {
-                Personagens alvo = filaTurnos.espiar();
-                alvo.receberDano(personagem.getNivel());
-                System.out.println(personagem.getNome() + " atacou " + alvo.getNome());
-            } else if (escolha.equals("2")) {
-                personagem.curar(20);
-                System.out.println(personagem.getNome() + " se curou");
-            } else {
-                System.out.println("Ação inválida. Perdeu o turno.");
-            }
+        
+        System.out.println("1. Atacar");
+        System.out.println("2. Curar-se");
+        System.out.print("Escolha: ");
+        String escolha = sc.nextLine();
+        
+        if (escolha.equals("1")) {
+            Personagens alvo = filaTurnos.espiar();
+            alvo.receberDano(personagem.getNivel());
+            System.out.println(personagem.getNome() + " atacou " + alvo.getNome());
+        } else if (escolha.equals("2")) {
+            personagem.curar(10);
+            System.out.println(personagem.getNome() + " se curou");
         } else {
-            int acao = random.nextInt(2); // 0 = atacar, 1 = curar
-            if (acao == 0) {
-                Personagens alvo = filaTurnos.espiar();
-                alvo.receberDano(personagem.getNivel());
-                System.out.println(personagem.getNome() + " atacou " + alvo.getNome());
-            } else {
-                personagem.curar(10);
-                System.out.println(personagem.getNome() + " se curou");
-            }
+            System.out.println("Ação inválida. Perdeu o turno.");
         }
     }
 
