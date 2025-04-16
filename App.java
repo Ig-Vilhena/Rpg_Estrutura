@@ -188,7 +188,7 @@ public class App {
                                     fila.enfileirar(personagem2);
 
                                     Arena batalhaPvE = new Arena(1, fila);
-                                    batalhaPvE.iniciarBatalha();   
+                                    batalhaPvE.iniciarBatalhaPvP();   
                                     
                                     do {
                                         System.out.println("Deseja jogar novamente?");
