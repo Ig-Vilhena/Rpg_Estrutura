@@ -6,7 +6,6 @@ public class App {
         Jogador jogador = null;
         String opcao;
         boolean continuar = true;
-        Arena arena = new Arena();
 
         // Tela Login/Cadastro
         do {
