@@ -240,20 +240,30 @@ public class App {
                                         Arena batalhaPvE = new Arena(1, fila);
                                         batalhaPvE.iniciarBatalha();
                                     }
+                                    personagem = null;
+                                    Inimigo inimigo = null;
                                     do{
                                         System.out.println("Deseja jogar novamente");
                                         System.out.println("1. Sim");
                                         System.out.println("2. Não");
                                         opcao = sc.nextLine();
 
-                                        if (opcao == "1") {
-                                            
-                                        }else if (opcao == "2") {
+                                        if (opcao.equals("1")) {
+                                            if (personagem != null && inimigo != null) {
+                                                personagem.setVidaAtual(personagem.getVidaMaxima());
+                                                inimigo.setVidaAtual(inimigo.getVidaMaxima());
+                                            }
+                                            continuar = true;
+                                        }else if (opcao.equals("2")) {
+                                            if (personagem != null && inimigo != null) {
+                                                personagem.setVidaAtual(personagem.getVidaMaxima());
+                                                inimigo.setVidaAtual(inimigo.getVidaMaxima());
+                                            }
                                             continuar = false;
                                         }else{
-                                            System.out.println("Opção inválida. Tente novamente.");
+                                            System.out.println("Opção inválida");
                                         }
-                                    }while(continuar);
+                                    }while(!opcao.equals("1") && !opcao.equals("2"));
                                 }
                             } while (continuar);
                             continuar = true;
