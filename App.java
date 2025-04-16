@@ -65,9 +65,7 @@ public class App {
             System.out.println("\n===== MENU PRINCIPAL =====");
             System.out.println("1. Ver/Editar Personagens");
             System.out.println("2. Criar Novo Personagem");
-            System.out.println("3. Atribuir Pontos de Atributos");
-            System.out.println("4. Comprar/Equipar Itens");
-            System.out.println("5. Iniciar Batalha");
+            System.out.println("3. Iniciar Batalha");
             System.out.println("X. Sair");
             opcao = sc.nextLine();
 
@@ -132,14 +130,6 @@ public class App {
                     break;
 
                 case "3":
-                    // jogador.atribuirAtributos(sc);
-                    break;
-
-                case "4":
-                    // jogador.comprarEquiparItens(sc);
-                    break;
-
-                case "5":
                     if (!jogador.getPersonagens().isEmpty()){
                         System.out.println("==== Tipo de batalha ====");
                         System.out.println("1. PvP");
