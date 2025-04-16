@@ -74,41 +74,49 @@ public class App {
 
             switch (opcao) {
                 case "1":
-                    System.out.println("\n===== PERSONAGENS CRIADOS =====");
-                    jogador.getPersonagens().exibir();
+                
+                    do{
+                        System.out.println("\n===== PERSONAGENS CRIADOS =====");
+                        jogador.getPersonagens().exibir();
 
-                    if (!jogador.getPersonagens().isEmpty()) {
-                        System.out.println("\nDeseja editar algum personagem?");
-                        System.out.println("1. Sim");
-                        System.out.println("2. Não");
-                        opcao = sc.nextLine();
 
-                        switch (opcao) {
-                            case "1":
-                            System.out.println("Digite o índice do personagem que deseja editar:");
-                            int indice = sc.nextInt();
-                            sc.nextLine();
+                        if (!jogador.getPersonagens().isEmpty()) {
+                            System.out.println("\nDeseja editar algum personagem?");
+                            System.out.println("1. Sim");
+                            System.out.println("2. Não");
+                            opcao = sc.nextLine();
 
-                            Personagens personagem = jogador.getPersonagens().getElementoPorIndice(indice);
-                            if (personagem != null) {
-                                System.out.println("Personagem selecionado: " + personagem.getNome());
+                            switch (opcao) {
+                                case "1":
+                                System.out.println("Digite o índice do personagem que deseja editar:");
+                                int indice = sc.nextInt();
+                                    sc.nextLine();
+
+                                Personagens personagem = jogador.getPersonagens().getElementoPorIndice(indice);
+                                if (personagem != null) {
+                                    System.out.println("Personagem selecionado: " + personagem.getNome());
                             
-                                System.out.println("Digite o novo nome:");
-                                String novoNome = sc.nextLine();
-                                personagem.setNome(novoNome);
-                                System.out.println("Nome atualizado com sucesso!");
+                                    System.out.println("Digite o novo nome:");
+                                    String novoNome = sc.nextLine();
+                                    personagem.setNome(novoNome);
+                                    System.out.println("Nome atualizado com sucesso!");
+                                    continuar = false;
+                                }
+                                break;
+
+                                case "2":
+                                System.out.println("Saindo...");
+                                continuar = false;
+                                break;
+
+                                default:
+                                System.out.println("Opçao invalida");
+                                break;
                             }
-                            break;
+                        }   
+                    }while (continuar);
 
-                            case "2":
-                            System.out.println("Saindo...");
-                            break;
-
-                            default:
-                            System.out.println("Opçao invalida");
-                            break;
-                        }
-                    }
+                    continuar = true;
                     break;
 
                 case "2":
@@ -136,7 +144,7 @@ public class App {
                             break;
 
                             case "2":
-                                 Personagens personagemJogador = jogador.selecionarPersonagem();
+                            Personagens personagemJogador = jogador.selecionarPersonagem();
                                  if (personagemJogador == null) {
                                     System.out.println("Nenhum personagem disponível.");
                                     break;
@@ -151,14 +159,13 @@ public class App {
 
                                 Arena batalhaPvE = new Arena(1, fila);
                                 batalhaPvE.iniciarBatalha();
-
                             break;
                         
                             default:
                             System.out.println("opcao inexistente");
                             break;
                         } 
-                        
+
                     }else{
                         System.out.println("Você precisa criar pelo menos um personagem antes de iniciar uma batalha.");
                     }
