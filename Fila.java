@@ -80,19 +80,23 @@ public class Fila {
         }
         return false;
     }
+
     public void exibir() {
         if (isEmpty()) {
             System.out.println("Não há personagens criados");
             return;
         }
-    
+
         Node aux = head;
         while (aux != null) {
             Personagens p = (Personagens) aux.valor;
-            System.out.println("- " + p.getNome() + " (HP: " + p.getVidaAtual() + "  Nível: " + p.getNivel() + "  Mana: " + p.getManaAtual() + "  Id(personagem): " + p.getIdPersonagem() + ")");
+            System.out.println("- " + p.getIndice() + " " + " " + p.getNome() + " (HP: " + p.getVidaAtual()
+                    + "  Nível: "
+                    + p.getNivel() + "  Mana: " + p.getManaAtual() + "  Id(personagem): " + p.getIdPersonagem() + ")");
             aux = aux.next;
         }
     }
+
     public Personagens desenfileirar() {
         if (isEmpty()) {
             return null;
