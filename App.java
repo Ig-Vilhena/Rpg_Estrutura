@@ -136,6 +136,21 @@ public class App {
                             break;
 
                             case "2":
+                                 Personagens personagemJogador = jogador.selecionarPersonagem();
+                                 if (personagemJogador == null) {
+                                    System.out.println("Nenhum personagem disponível.");
+                                    break;
+                                       }
+
+                                   Fila fila = new Fila(2);
+                                   fila.enfileirar(personagemJogador);
+
+                                
+                                 Inimigo inimigo = new Inimigo("Goblin", 1, 80, 80, 30, 30, "Goblin");
+                                fila.enfileirar(inimigo);
+
+                                Arena batalhaPvE = new Arena(1, fila);
+                                batalhaPvE.iniciarBatalha();
 
                             break;
                         
